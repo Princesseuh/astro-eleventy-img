@@ -107,3 +107,17 @@ and the following files will be generated in the `public/assets/images` folder:
 The included `Image` component is a thin wrapper around `generateImage`, it works for most needs but do not hesitate to build your own!
 
 ## [Complete Docs available here](./Docs.md)
+
+## Troubleshooting
+
+### require is not defined
+
+You need to add the following to your astro project config, hopefully this won't be required in the future:
+
+```js
+  vite: {
+    ssr: {
+      external: ["@11ty/eleventy-img"],
+    },
+  },
+```
