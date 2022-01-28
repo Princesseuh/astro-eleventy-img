@@ -1,0 +1,48 @@
+---
+import Image from "@11ty/eleventy-img"
+import { generateImage } from "./main"
+import { Markdown } from "astro/components"
+const {
+  src,
+  alt,
+  caption,
+  options = {},
+  sizes = "",
+  classes = undefined,
+  quality = 90,
+} = Astro.props
+
+const image = generateImage(
+  src,
+  Object.assign(options, {
+    widths: [null],
+    formats: ["avif", "webp", "png"],
+    sharpWebpOptions: {
+      quality: quality,
+    },
+    sharpAvifOptions: {
+      quality: quality,
+    },
+  }),
+)
+
+const imageAttributes = {
+  alt: alt,
+  sizes: sizes,
+  loading: "lazy",
+  decoding: "async",
+}
+
+const html = Image.generateHTML(image, imageAttributes)
+const props: Record<string, string> = {}
+props.class ??= classes
+---
+
+<figure {...props}>
+  {html}
+  {caption && (
+    <figcaption>
+      <Markdown>{caption}</Markdown>
+    </figcaption>
+  )}
+</figure>
