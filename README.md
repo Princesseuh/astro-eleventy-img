@@ -1,8 +1,24 @@
 # Astro + eleventy-img
 
-A tiny script intended to be used with Astro for generating images with [eleventy-img](https://github.com/11ty/eleventy-img)
+A tiny script intended to be used with [Astro](https://astro.build/) for generating images with [eleventy-img](https://github.com/11ty/eleventy-img)
 
 It was mostly made for my own website and I do not intend to really support this as more modern solutions are in the work for Astro
+
+## Installation
+
+```shell
+npm install astro-eleventy-img
+```
+
+Due to an issue in the current version of Vite used by Astro, you need to add the following to your astro project config file:
+
+```js
+vite: {
+    ssr: {
+      external: ["@11ty/eleventy-img"],
+    },
+},
+```
 
 ## Usage
 
@@ -112,12 +128,12 @@ The included `Image` component is a thin wrapper around `generateImage`, it work
 
 ### require is not defined
 
-You need to add the following to your astro project config, hopefully this won't be required in the future:
+Make sure to add the following to your `astro.config.js` config:
 
 ```js
-  vite: {
+vite: {
     ssr: {
       external: ["@11ty/eleventy-img"],
     },
-  },
+},
 ```
