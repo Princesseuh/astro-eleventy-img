@@ -1,6 +1,6 @@
 # Astro + eleventy-img
 
-A tiny script intended to be used with [Astro](https://astro.build/) for generating images with [eleventy-img](https://github.com/11ty/eleventy-img)
+A tiny script intended to be used with [Astro](https://astro.build/) for generating images with [eleventy-img](https://github.com/11ty/eleventy-img). It also supports creating blurry placeholders for said images
 
 It was mostly made for my own website and I do not intend to really support this as more modern solutions are in the work for Astro
 
@@ -25,6 +25,8 @@ vite: {
 The best way to use this in my opinion is to use it to generate images in the `public` folder. That way, they're copied directly to the result website. This is the default behavior.
 
 ### Javascript Usage
+
+#### Generating images
 
 ```astro
 ---
@@ -78,16 +80,39 @@ RfSNa8TCUW-300.webp
 RfSNa8TCUW-300.avif
 ```
 
+#### Generating placeholders
+
+```astro
+---
+import { generatePlaceholder } from "astro-eleventy-img"
+
+const myPlaceholder = generatePlaceholder("src/assets/my_image.png")
+---
+
+<img src={myPlaceholder.dataURI} width={myPlaceholder.width} height={myPlaceholder.height} />
+```
+
+`generatePlaceholder` return an object containing all the properties needed for showing the image. So `myPlaceholder` in this example is equal to:
+
+```js
+{
+  dataURI: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAIAAABV+fA3AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAz0lEQVQImQHEADv/AJ7Ho7PYwTt5UhdkNjmLSUOPUCB4MSFzMkGMNACixqksb04WUy4wdz9cnFxPnksbaS0HTCo3hDUAnLmcRnFLQ289ZpZXn7Z9MpA+OYU9EFstVZpHAJ3GaqnPbJXFW5iyZNzLqZWvco+9YHeqVlKXSACu1myt13Cc1GW6ynnFrIjK4ouSzFZ/vlNsskgAytqD1d6Q3+Kevsl/xb951+OXyt6FstVytNRzAIS0S4i2S5u8TK3NXrPOZ57CYqLGXWiqOoi4Rz9UYMGpm241AAAAAElFTkSuQmCC"
+  width: 640
+  height: 514
+  quality: 60
+}
+```
+
 ### Component Usage
 
-Alternatively, it can also be used through a provided component to automatically generate proper HTML for you:
+Alternatively, it can also be used through a provided component to automatically generate the proper HTML for including the image and its placeholder:
 
 ```astro
 ---
 import { Image } from "astro-eleventy-img"
 ---
 
-<Image src="/src/assets/my_image.png" alt="My super image!" caption="This is my favorite image." />
+<Image src="src/assets/my_image.png" alt="My super image!" caption="This is my favorite image." />
 ```
 
 will generate the following HTML:
@@ -101,6 +126,11 @@ will generate the following HTML:
       alt="My super image!"
       loading="lazy"
       decoding="async"
+      style="
+      background-size: cover;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAIAAABV+fA3AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAz0lEQVQImQHEADv/AJ7Ho7PYwTt5UhdkNjmLSUOPUCB4MSFzMkGMNACixqksb04WUy4wdz9cnFxPnksbaS0HTCo3hDUAnLmcRnFLQ289ZpZXn7Z9MpA+OYU9EFstVZpHAJ3GaqnPbJXFW5iyZNzLqZWvco+9YHeqVlKXSACu1myt13Cc1GW6ynnFrIjK4ouSzFZ/vlNsskgAytqD1d6Q3+Kevsl/xb951+OXyt6FstVytNRzAIS0S4i2S5u8TK3NXrPOZ57CYqLGXWiqOoi4Rz9UYMGpm241AAAAAElFTkSuQmCC);
+    "
+      onload="this.style.backgroundImage='none'"
       src="/assets/images/4dWK95ygTq-640.png"
       width="640"
       height="514"
@@ -120,7 +150,7 @@ and the following files will be generated in the `public/assets/images` folder:
 4dWK95ygTq-640.png
 ```
 
-The included `Image` component is a thin wrapper around `generateImage`, it works for most needs but do not hesitate to build your own!
+The included `Image` component is a thin wrapper around `generateImage` and `generatePlaceholder`, it works for most needs but do not hesitate to build your own!
 
 ## [Complete Docs available here](./Docs.md)
 

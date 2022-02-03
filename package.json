@@ -30,7 +30,11 @@
   "homepage": "https://github.com/Princesseuh/astro-eleventy-img#readme",
   "dependencies": {
     "@11ty/eleventy-img": "^1.0.0",
-    "astro": "^0.22.1"
+    "@types/sharp": "^0.29.5",
+    "astro": "^0.22.1",
+    "base64url-xplatform": "^1.1.2",
+    "datauri": "^4.1.0",
+    "sharp": "^0.29.3"
   },
   "devDependencies": {
     "@types/eslint": "^8.2.1",

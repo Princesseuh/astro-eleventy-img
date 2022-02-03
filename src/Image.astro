@@ -1,7 +1,20 @@
 ---
 import Image from "@11ty/eleventy-img"
-import { generateImage } from "./main"
+import { generateImage, ImageOptions } from "./main"
+import { generatePlaceholder, PlaceholderOptions } from "./placeholder"
 import { Markdown } from "astro/components"
+
+interface Props {
+  src: string
+  alt: string
+  caption?: string
+  options?: ImageOptions
+  sizes?: string
+  classes?: string
+  quality?: number
+  placeholderOptions: PlaceholderOptions
+}
+
 const {
   src,
   alt,
@@ -10,7 +23,8 @@ const {
   sizes = "",
   classes = undefined,
   quality = 90,
-} = Astro.props
+  placeholderOptions = {},
+} = Astro.props as Props
 
 const image = generateImage(
   src,
@@ -26,11 +40,15 @@ const image = generateImage(
   }),
 )
 
+const placeHolder = await generatePlaceholder(src, placeholderOptions)
+
 const imageAttributes = {
   alt: alt,
   sizes: sizes,
   loading: "lazy",
   decoding: "async",
+  style: `background-size: cover;background-image:url(${placeHolder.dataURI})`,
+  onload: `this.style.backgroundImage='none'`,
 }
 
 const html = Image.generateHTML(image, imageAttributes)
