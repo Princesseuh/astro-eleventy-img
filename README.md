@@ -1,8 +1,8 @@
 # Astro + eleventy-img
 
-A tiny script intended to be used with [Astro](https://astro.build/) for generating images with [eleventy-img](https://github.com/11ty/eleventy-img). It also supports creating blurry placeholders for said images
+A tiny script and component intended to be used with [Astro](https://astro.build/) for generating images with [eleventy-img](https://github.com/11ty/eleventy-img). It also supports creating blurry placeholders for said images
 
-It was mostly made for my own website and I do not intend to really support this as more modern solutions are in the work for Astro
+It was mostly made for my own website and I do not intend to really support this outside of my own needs as more modern and generalist solutions are in the work for Astro
 
 ## Installation
 
