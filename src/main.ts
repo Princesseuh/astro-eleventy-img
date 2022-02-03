@@ -7,7 +7,7 @@ const defaultOptions: ImageOptions = {
 
 export function generateImage(src: string, options: ImageOptions): Record<string, ImageFormat[]> {
   // Merge with default settings
-  const settings = Object.assign(options, defaultOptions)
+  const settings = Object.assign(defaultOptions, options)
 
   // Generate the image
   ;(async () => {
