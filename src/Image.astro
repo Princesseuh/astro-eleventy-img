@@ -1,66 +1,57 @@
 ---
-import Image from "@11ty/eleventy-img"
-import { generateImage, ImageOptions } from "./main"
-import { generatePlaceholder, PlaceholderOptions } from "./placeholder"
-import { Markdown } from "astro/components"
+import Image from '@11ty/eleventy-img';
+import { generateImage, ImageOptions } from './main';
+import { generatePlaceholder, PlaceholderOptions } from './placeholder';
+import { Markdown } from 'astro/components';
 
 interface Props {
-  src: string
-  alt: string
-  caption?: string
-  options?: ImageOptions
-  sizes?: string
-  classes?: string
-  quality?: number
-  placeholderOptions?: PlaceholderOptions
+	src: string;
+	alt: string;
+	caption?: string;
+	options?: ImageOptions;
+	sizes?: string;
+	classes?: string;
+	quality?: number;
+	placeholderOptions?: PlaceholderOptions;
 }
 
-const {
-  src,
-  alt,
-  caption,
-  options = {},
-  sizes = "",
-  classes = undefined,
-  quality = 90,
-  placeholderOptions = {},
-} = Astro.props as Props
+const { src, alt, caption, options = {}, sizes = '', classes = undefined, quality = 90, placeholderOptions = {} } = Astro.props as Props;
 
 const image = generateImage(
-  src,
-  Object.assign(options, {
-    widths: [null],
-    formats: ["avif", "webp", "png"],
-    sharpWebpOptions: {
-      quality: quality,
-    },
-    sharpAvifOptions: {
-      quality: quality,
-    },
-  }),
-)
+	src,
+	Object.assign(options, {
+		widths: [null],
+		formats: ['avif', 'webp', 'png'],
+		sharpWebpOptions: {
+			quality: quality,
+		},
+		sharpAvifOptions: {
+			quality: quality,
+		},
+	})
+);
 
-const placeHolder = await generatePlaceholder(src, placeholderOptions)
+const placeHolder = await generatePlaceholder(src, placeholderOptions);
 
 const imageAttributes = {
-  alt: alt,
-  sizes: sizes,
-  loading: "lazy",
-  decoding: "async",
-  style: `background-size: cover;background-image:url(${placeHolder.dataURI})`,
-  onload: `this.style.backgroundImage='none'`,
-}
+	alt: alt,
+	sizes: sizes,
+	loading: 'lazy',
+	decoding: 'async',
+	style: `background-size: cover;background-image:url(${placeHolder.dataURI})`,
+	onload: `this.style.backgroundImage='none'`,
+};
 
-const html = Image.generateHTML(image, imageAttributes)
-const props: Record<string, string> = {}
-props.class ??= classes
+const html = Image.generateHTML(image, imageAttributes);
+const props: Record<string, string> = {};
+props.class ??= classes;
 ---
 
 <figure {...props}>
-  {html}
-  {caption && (
-    <figcaption>
-      <Markdown>{caption}</Markdown>
-    </figcaption>
-  )}
+	<Fragment set:html={html} />
+	{caption && (
+		<figcaption>
+			<Markdown>{caption}</Markdown>
+		</figcaption>
+	)}
 </figure>
