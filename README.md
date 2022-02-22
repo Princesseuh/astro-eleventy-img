@@ -30,13 +30,13 @@ The best way to use this in my opinion is to use it to generate images in the `p
 
 ```astro
 ---
-import { generateImage } from "astro-eleventy-img"
+import { generateImage } from 'astro-eleventy-img';
 
-const myImage = generateImage("src/assets/my_image.png", {
+const myImage = generateImage('src/assets/my_image.png', {
   // The options here are passed directly to eleventy-img
   widths: [300],
-  formats: ["webp", "avif"],
-})
+  formats: ['webp', 'avif'],
+});
 ---
 
 <img src={myImage.webp[0].url} />
@@ -84,9 +84,9 @@ RfSNa8TCUW-300.avif
 
 ```astro
 ---
-import { generatePlaceholder } from "astro-eleventy-img"
+import { generatePlaceholder } from 'astro-eleventy-img';
 
-const myPlaceholder = generatePlaceholder("src/assets/my_image.png")
+const myPlaceholder = generatePlaceholder('src/assets/my_image.png');
 ---
 
 <img src={myPlaceholder.dataURI} width={myPlaceholder.width} height={myPlaceholder.height} />
@@ -96,10 +96,10 @@ const myPlaceholder = generatePlaceholder("src/assets/my_image.png")
 
 ```js
 {
-  dataURI: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAIAAABV+fA3AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAz0lEQVQImQHEADv/AJ7Ho7PYwTt5UhdkNjmLSUOPUCB4MSFzMkGMNACixqksb04WUy4wdz9cnFxPnksbaS0HTCo3hDUAnLmcRnFLQ289ZpZXn7Z9MpA+OYU9EFstVZpHAJ3GaqnPbJXFW5iyZNzLqZWvco+9YHeqVlKXSACu1myt13Cc1GW6ynnFrIjK4ouSzFZ/vlNsskgAytqD1d6Q3+Kevsl/xb951+OXyt6FstVytNRzAIS0S4i2S5u8TK3NXrPOZ57CYqLGXWiqOoi4Rz9UYMGpm241AAAAAElFTkSuQmCC"
-  width: 640
-  height: 514
-  quality: 60
+  dataURI: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAIAAABV+fA3AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAz0lEQVQImQHEADv/AJ7Ho7PYwTt5UhdkNjmLSUOPUCB4MSFzMkGMNACixqksb04WUy4wdz9cnFxPnksbaS0HTCo3hDUAnLmcRnFLQ289ZpZXn7Z9MpA+OYU9EFstVZpHAJ3GaqnPbJXFW5iyZNzLqZWvco+9YHeqVlKXSACu1myt13Cc1GW6ynnFrIjK4ouSzFZ/vlNsskgAytqD1d6Q3+Kevsl/xb951+OXyt6FstVytNRzAIS0S4i2S5u8TK3NXrPOZ57CYqLGXWiqOoi4Rz9UYMGpm241AAAAAElFTkSuQmCC';
+  width: 640;
+  height: 514;
+  quality: 60;
 }
 ```
 
@@ -109,7 +109,7 @@ Alternatively, it can also be used through a provided component to automatically
 
 ```astro
 ---
-import { Image } from "astro-eleventy-img"
+import { Image } from 'astro-eleventy-img';
 ---
 
 <Image src="src/assets/my_image.png" alt="My super image!" caption="This is my favorite image." />
