@@ -7,7 +7,6 @@ const DataURIParser = cjs('datauri/parser');
 
 import { writeFile, readFileSync, mkdir } from 'fs';
 import { createHash } from 'crypto';
-import { Base64Url } from 'base64url-xplatform';
 
 const cache = {};
 
@@ -57,7 +56,7 @@ function getHash(options: { path: string; options: PlaceholderOptions }): string
 
 	hash.update(JSON.stringify(options));
 
-	return Base64Url.encode(hash.digest()).substring(0, 5);
+	return hash.digest('base64url').substring(0, 5);
 }
 
 // Adapted from https://github.com/google/eleventy-high-performance-blog/blob/624aaa9ede9df609e2d4656f23d819621f5cb464/_11ty/blurry-placeholder.js

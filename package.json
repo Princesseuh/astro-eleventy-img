@@ -1,6 +1,6 @@
 {
   "name": "astro-eleventy-img",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Astro + eleventy-img",
   "type": "module",
   "exports": {
@@ -34,7 +34,6 @@
   "dependencies": {
     "@11ty/eleventy-img": "^1.0.0",
     "astro": "^0.23.0",
-    "base64url-xplatform": "^1.1.2",
     "datauri": "^4.1.0",
     "sharp": "^0.30.1"
   },
