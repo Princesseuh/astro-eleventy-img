@@ -1,6 +1,6 @@
 {
   "name": "astro-eleventy-img",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Astro + eleventy-img",
   "type": "module",
   "exports": {
@@ -33,7 +33,7 @@
   "homepage": "https://github.com/Princesseuh/astro-eleventy-img#readme",
   "dependencies": {
     "@11ty/eleventy-img": "^1.0.0",
-    "astro": "^0.23.0",
+    "astro": "^0.25.0",
     "datauri": "^4.1.0",
     "sharp": "^0.30.1"
   },
@@ -56,8 +56,5 @@
     "prettier": "^2.5.1",
     "prettier-plugin-astro": "^0.0.12",
     "typescript": "^4.5.5"
-  },
-  "peerDependencies": {
-    "astro": "^0.23.0"
   }
 }
