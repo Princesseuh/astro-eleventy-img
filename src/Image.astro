@@ -38,7 +38,7 @@ const imageAttributes = {
 	sizes: sizes,
 	loading: 'lazy',
 	decoding: 'async',
-	style: `background-size: cover;background-image:url(${placeHolder.dataURI})`,
+	style: `background-size: cover;background-image:url(${placeHolder?.dataURI})`,
 	onload: `this.style.backgroundImage='none'`,
 };
 
