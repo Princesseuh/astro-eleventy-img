@@ -28,7 +28,7 @@ const defaultOptions: PlaceholderOptions = {
 };
 
 export async function generatePlaceholder(src: string, options: PlaceholderOptions = defaultOptions): Promise<PlaceholderResult> {
-	options = Object.assign(options, defaultOptions);
+	options = Object.assign({}, defaultOptions, options);
 
 	// Ensure the outputDir has an ending slash, otherwise files would get generated in the wrong folder
 	options.outputDir = options.outputDir.endsWith('/') ? options.outputDir : options.outputDir + '/';
