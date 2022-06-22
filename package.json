@@ -1,6 +1,6 @@
 {
   "name": "astro-eleventy-img",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Astro + eleventy-img",
   "type": "module",
   "exports": {
