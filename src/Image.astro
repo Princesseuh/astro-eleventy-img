@@ -43,15 +43,16 @@ const imageAttributes = {
 };
 
 const html = Image.generateHTML(image, imageAttributes);
-const props: Record<string, string> = {};
-props.class ??= classes;
+const props: Record<string, string> = {
+	class: classes
+};
 ---
 
 <figure {...props}>
 	<Fragment set:html={html} />
 	{caption && (
-		<figcaption>
-			<Markdown>{caption}</Markdown>
-		</figcaption>
+	<figcaption>
+		<Markdown>{caption}</Markdown>
+	</figcaption>
 	)}
 </figure>
