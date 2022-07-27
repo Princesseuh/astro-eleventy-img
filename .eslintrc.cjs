@@ -1,4 +1,4 @@
-/** @type {import("@types/eslint").Linter.Config */
+/** @type import("@types/eslint").Linter.Config */
 module.exports = {
 	env: {
 		node: true,

@@ -1,8 +1,8 @@
 ---
+import type { ImageOptions } from '@11ty/eleventy-img';
 import Image from '@11ty/eleventy-img';
-import { generateImage, ImageOptions } from './main';
+import { generateImage } from './main';
 import { generatePlaceholder, PlaceholderOptions } from './placeholder';
-import { Markdown } from 'astro/components';
 
 interface Props {
 	src: string;
@@ -44,15 +44,11 @@ const imageAttributes = {
 
 const html = Image.generateHTML(image, imageAttributes);
 const props: Record<string, string> = {
-	class: classes
+	class: classes,
 };
 ---
 
 <figure {...props}>
 	<Fragment set:html={html} />
-	{caption && (
-	<figcaption>
-		<Markdown>{caption}</Markdown>
-	</figcaption>
-	)}
+	{caption && <figcaption>{caption}</figcaption>}
 </figure>

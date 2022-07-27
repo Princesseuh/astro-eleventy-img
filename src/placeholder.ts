@@ -2,11 +2,11 @@ import { createRequire } from 'module';
 
 // Please tell me we'll be free from this some day
 const cjs = createRequire(import.meta.url);
-const sharp = cjs('sharp');
-const DataURIParser = cjs('datauri/parser');
+const sharp: typeof import('sharp') = cjs('sharp');
+const DataURIParser: typeof import('datauri/parser') = cjs('datauri/parser');
 
-import { writeFile, readFileSync, mkdir } from 'fs';
 import { createHash } from 'crypto';
+import { mkdir, readFileSync, writeFile } from 'fs';
 
 const cache = {};
 
