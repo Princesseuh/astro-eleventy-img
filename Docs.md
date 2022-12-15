@@ -61,7 +61,7 @@ It should be noted that unlike images, placeholders should be in `src` and not i
 
 ##### Caution about quality
 
-Please note that `quality` might not work like you think it does, it does not define the image blurryness or anything like that but the amount of pixel your final image will be made of, that means that if you have a square image and you put a value less than 4, you'll only have corners of a blurry image showing
+Please note that `quality` might not work like you think it does, it does not define the image blurriness or anything like that but the amount of pixel your final image will be made of, that means that if you have a square image and you put a value less than 4, you'll only have corners of a blurry image showing
 
 The default value should accommodate more or less all kind of images but you might need to set an higher value for certain formats
 
@@ -75,7 +75,7 @@ See [generateImage#src](#src)
 
 ### options
 
-See [generateImage#options](#options). However, it should be noted that the default settings also include the following in addition to the previously mentionned ones:
+See [generateImage#options](#options). However, it should be noted that the default settings also include the following in addition to the previously mentioned ones:
 
 ```js
 {

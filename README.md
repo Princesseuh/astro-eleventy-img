@@ -2,22 +2,14 @@
 
 A tiny script and component intended to be used with [Astro](https://astro.build/) for generating images with [eleventy-img](https://github.com/11ty/eleventy-img). It also supports creating blurry placeholders for said images
 
-It was mostly made for my own website and I do not intend to really support this outside of my own needs as more modern and generalist solutions are in the work for Astro
+It was mostly made for my own website and I do not intend to really support this outside of my own needs. For more generalist solutions, check out the official [@astrojs/image](https://docs.astro.build/en/guides/integrations-guide/image/) integration or [astro-imagetools](https://github.com/RafidMuhymin/astro-imagetools).
+
+**This package is intended to be used in Astro's static mode and does NOT support Server-Side Rendering.**
 
 ## Installation
 
 ```shell
 npm install astro-eleventy-img
-```
-
-Due to an issue in the current version of Vite used by Astro, you need to add the following to your astro project config file:
-
-```js
-vite: {
-    ssr: {
-      external: ["@11ty/eleventy-img"],
-    },
-},
 ```
 
 ## Usage
@@ -158,7 +150,7 @@ The included `Image` component is a thin wrapper around `generateImage` and `gen
 
 ### require is not defined
 
-Make sure to add the following to your `astro.config.js` config:
+Add the following to your `astro.config.js` config:
 
 ```js
 vite: {
