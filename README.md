@@ -32,7 +32,7 @@ The best way to use this in my opinion is to use it to generate images in the `p
 ---
 import { generateImage } from 'astro-eleventy-img';
 
-const myImage = generateImage('src/assets/my_image.png', {
+const myImage = await generateImage('src/assets/my_image.png', {
   // The options here are passed directly to eleventy-img
   widths: [300],
   formats: ['webp', 'avif'],
