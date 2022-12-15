@@ -31,7 +31,7 @@ export async function generatePlaceholder(src: string, options: PlaceholderOptio
 	const mergedOptions: Required<PlaceholderOptions> = Object.assign({}, defaultOptions, options);
 
 	// Ensure the outputDir has an ending slash, otherwise files would get generated in the wrong folder
-	options.outputDir = mergedOptions.outputDir.endsWith('/') ? options.outputDir : options.outputDir + '/';
+	options.outputDir = mergedOptions.outputDir.endsWith('/') ? mergedOptions.outputDir : mergedOptions.outputDir + '/';
 
 	// Generate hash
 	const hash = getHash({ path: src, options: mergedOptions });
