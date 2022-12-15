@@ -1,4 +1,4 @@
-import type { ImageOptions } from '@11ty/eleventy-img';
+import type { ImageFormat, ImageOptions } from '@11ty/eleventy-img';
 import Image from '@11ty/eleventy-img';
 
 const defaultOptions: ImageOptions = {
@@ -6,15 +6,12 @@ const defaultOptions: ImageOptions = {
 	urlPath: '/assets/images',
 };
 
-export function generateImage(src: string, options: ImageOptions): Image.Metadata {
+export async function generateImage(src: string, options: ImageOptions): Promise<Image.Metadata> {
 	// Merge with default settings
 	const settings = Object.assign(defaultOptions, options);
 
-	// Generate the image
-	(async () => {
-		await Image(src, settings);
-	})();
-
-	// Return the images info
-	return Image.statsSync(src, settings);
+	// Generate the image and returns its info
+	return await Image(src, settings);
 }
+
+export type { ImageOptions, ImageFormat };

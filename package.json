@@ -1,6 +1,6 @@
 {
   "name": "astro-eleventy-img",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Astro + eleventy-img",
   "type": "module",
   "exports": {
@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "mocha --parallel --timeout 15000",
-    "format": "prettier -w .",
+    "format": "prettier -w . --plugin-search-dir=. --cache",
     "lint": "eslint . --ext .ts,.js"
   },
   "repository": {
@@ -35,24 +35,23 @@
   "homepage": "https://github.com/Princesseuh/astro-eleventy-img#readme",
   "dependencies": {
     "@11ty/eleventy-img": "^2.0.1",
-    "astro": "1.0.0-rc.1",
+    "@types/11ty__eleventy-img": "^2.0.1",
+    "astro": "1.6.15",
     "datauri": "^4.1.0",
-    "sharp": "^0.30.7"
+    "sharp": "^0.31.2"
   },
   "devDependencies": {
-    "@types/11ty__eleventy-img": "^2.0.1",
-    "@types/eslint": "^8.4.5",
-    "@types/node": "^18.6.1",
-    "@types/prettier": "^2.6.4",
-    "@types/sharp": "^0.30.4",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
-    "eslint": "^8.20.0",
+    "@types/eslint": "^8.4.10",
+    "@types/node": "^18.11.15",
+    "@types/prettier": "^2.7.1",
+    "@types/sharp": "^0.31.0",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "mocha": "^10.0.0",
-    "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.1.2",
-    "typescript": "^4.7.4"
+    "prettier": "^2.8.1",
+    "prettier-plugin-astro": "^0.7.0",
+    "typescript": "^4.9.4"
   }
 }

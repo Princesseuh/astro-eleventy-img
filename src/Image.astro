@@ -2,7 +2,7 @@
 import type { ImageOptions } from '@11ty/eleventy-img';
 import Image from '@11ty/eleventy-img';
 import { generateImage } from './main';
-import { generatePlaceholder, PlaceholderOptions } from './placeholder';
+import { generatePlaceholder, type PlaceholderOptions } from './placeholder';
 
 interface Props {
 	src: string;
@@ -15,9 +15,9 @@ interface Props {
 	placeholderOptions?: PlaceholderOptions;
 }
 
-const { src, alt, caption, options = {}, sizes = '', classes = undefined, quality = 90, placeholderOptions = {} } = Astro.props as Props;
+const { src, alt, caption, options = {}, sizes = '', classes = undefined, quality = 90, placeholderOptions = {} } = Astro.props;
 
-const image = generateImage(
+const image = await generateImage(
 	src,
 	Object.assign(options, {
 		widths: [null],
@@ -43,7 +43,7 @@ const imageAttributes = {
 };
 
 const html = Image.generateHTML(image, imageAttributes);
-const props: Record<string, string> = {
+const props: Record<string, string | undefined> = {
 	class: classes,
 };
 ---

@@ -8,7 +8,7 @@ const DataURIParser: typeof import('datauri/parser') = cjs('datauri/parser');
 import { createHash } from 'crypto';
 import { mkdir, readFileSync, writeFile } from 'fs';
 
-const cache = {};
+const cache: Record<string, PlaceholderResult> = {};
 
 export interface PlaceholderOptions {
 	quality?: number;
@@ -22,32 +22,34 @@ export interface PlaceholderResult {
 	quality: number;
 }
 
-const defaultOptions: PlaceholderOptions = {
+const defaultOptions: Required<PlaceholderOptions> = {
 	quality: 60,
 	outputDir: 'src/assets/placeholders',
 };
 
 export async function generatePlaceholder(src: string, options: PlaceholderOptions = defaultOptions): Promise<PlaceholderResult> {
-	options = Object.assign({}, defaultOptions, options);
+	const mergedOptions: Required<PlaceholderOptions> = Object.assign({}, defaultOptions, options);
 
 	// Ensure the outputDir has an ending slash, otherwise files would get generated in the wrong folder
-	options.outputDir = options.outputDir.endsWith('/') ? options.outputDir : options.outputDir + '/';
+	options.outputDir = mergedOptions.outputDir.endsWith('/') ? options.outputDir : options.outputDir + '/';
 
 	// Generate hash
-	const hash = getHash({ path: src, options });
+	const hash = getHash({ path: src, options: mergedOptions });
 
 	// Check if we've generated this file before on disk
 	try {
-		const existingFile = readFileSync(options.outputDir + hash + '.placeholder', {
+		const existingFile = readFileSync(mergedOptions.outputDir + hash + '.placeholder', {
 			encoding: 'utf-8',
 		});
 
 		return JSON.parse(existingFile);
 	} catch (err) {
 		// Otherwise, the file doesn't exist, so let's generate it
-		if (err.code === 'ENOENT') {
-			return await getDataURI(src, hash, options);
+		if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+			return await getDataURI(src, hash, mergedOptions);
 		}
+
+		throw err;
 	}
 }
 
@@ -60,7 +62,7 @@ function getHash(options: { path: string; options: PlaceholderOptions }): string
 }
 
 // Adapted from https://github.com/google/eleventy-high-performance-blog/blob/624aaa9ede9df609e2d4656f23d819621f5cb464/_11ty/blurry-placeholder.js
-async function getDataURI(src: string, hash: string, options: PlaceholderOptions): Promise<PlaceholderResult> {
+async function getDataURI(src: string, hash: string, options: Required<PlaceholderOptions>): Promise<PlaceholderResult> {
 	// If we have it cached, just return that
 	// We also check if the quality requested is the same so people can update quality easily without needing to reload
 	if (cache[src] && cache[src].quality === options.quality) {
@@ -72,8 +74,11 @@ async function getDataURI(src: string, hash: string, options: PlaceholderOptions
 	const image = await sharp(src);
 	const imageMetadata = await image.metadata();
 
+	const imageWidth = imageMetadata.width ?? 0;
+	const imageHeight = imageMetadata.height ?? 0;
+
 	// Find perfect size for placeholder
-	const placeholderDimension = getBitmapDimensions(imageMetadata.width, imageMetadata.height, options.quality);
+	const placeholderDimension = getBitmapDimensions(imageWidth, imageHeight, options.quality);
 
 	// Create image
 	const buffer = await image
@@ -83,10 +88,10 @@ async function getDataURI(src: string, hash: string, options: PlaceholderOptions
 		.toBuffer();
 
 	const parser = new DataURIParser();
-	const data = {
-		dataURI: parser.format('.png', buffer).content,
-		width: imageMetadata.width,
-		height: imageMetadata.height,
+	const data: PlaceholderResult = {
+		dataURI: parser.format('.png', buffer).content ?? '',
+		width: imageWidth,
+		height: imageHeight,
 		quality: options.quality,
 	};
 
