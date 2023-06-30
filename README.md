@@ -1,5 +1,8 @@
 # Astro + eleventy-img
 
+> **Warning**
+> This project is not supported anymore. Please use the official [`astro:assets`](https://docs.astro.build/en/guides/assets/) instead.
+
 A tiny script and component intended to be used with [Astro](https://astro.build/) for generating images with [eleventy-img](https://github.com/11ty/eleventy-img). It also supports creating blurry placeholders for said images
 
 It was mostly made for my own website and I do not intend to really support this outside of my own needs. For more generalist solutions, check out the official [@astrojs/image](https://docs.astro.build/en/guides/integrations-guide/image/) integration or [astro-imagetools](https://github.com/RafidMuhymin/astro-imagetools).
